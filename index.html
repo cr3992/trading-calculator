@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://kit.fontawesome.com/05114fc101.js" crossorigin="anonymous"></script>
+    
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+        .form-control:focus{
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 0px rgba(255, 100, 255, 0.5);
+        }
+    </style>
+    <script>
+        var myApp = angular.module("app",[]);
+        myApp.controller("controller",function($scope){
+            $scope.ceiling = function(a){
+                return Math.ceil(a);
+            }
+        });
+       
+    </script>
+</head>
+<body style="background-image:url('bgimg.jpg');">
+    <div class="container-fluid" ng-app="app" ng-controller="controller">
+        <div class="row text-light text-left" style="background-color:#173a55;">
+            <div class="col-10 mt-1">
+                <h2>Trading Calculator</h2>
+            </div>
+            <div class="col-2">
+                <a href="https://cr3992.github.io/tools/" class="text-light text-right"><span class="material-symbols-outlined mt-2" style="font-size:30px;">apps</span></a>
+              </div>
+        </div>
+        <div class="row text-left text-light" style="background-color:#787878;font-size:15px;">
+           <div class="col-12">
+            <i>This Calculator works only on profit</i> 
+           </div>
+        </div>
+        <div class="row mt-4 text-center">
+            <div class="col-1">
+                <i class="fa-brands fa-readme"></i>
+            </div>
+            <div class="col-9">
+                <h6>Read more about the Rule of Trading</h6> 
+            </div>
+            <div class="col-1">
+                <a class="btn btn-sm text-light" href="image.html" style="background-color:#173a55;">Click</a>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <hr class="hr">
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <i class="fa-solid fa-calendar-day"></i>
+            </div>
+            <div class="col-5">
+                <h6>Previous Day Amount</h6>
+            </div>
+            <div class="col-1">
+                <i class="fa-sharp fa-solid fa-calendar-days"></i>
+            </div>
+            <div class="col-5">
+                <h6>Current Day Amount</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <input type="number" ng-model="pre" class="form-control" placeholder="Enter Previous Day Amount">
+            </div>
+            <div class="col-6">
+                <input type="number" ng-model="cur" class="form-control" placeholder="Enter Current Day Amount">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-1">
+                <i class="fa-solid fa-money-bill-trend-up"></i>
+            </div>
+            <div class="col-3">
+                <h6>Total Profit</h6>
+            </div>
+            <div class="col-8">
+                <h6 class="form-control">{{(cur-pre)}} &#8377</h6>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-1">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+            </div>
+            <div class="col-3">
+                <h6>Backup 20%</h6>
+            </div>
+            <div class="col-8">
+                <h6 class="form-control">{{ceiling((cur-pre)/5)}} &#8377</h6>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-1">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="col-3">
+                <h6>Saving 30%</h6>
+            </div>
+            <div class="col-8">
+                <h6 class="form-control">{{ceiling((cur-pre)*0.3)}} &#8377</h6>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-1">
+                <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+            </div>
+            <div class="col-3">
+                <h6>Trade 50%</h6>
+            </div>
+            <div class="col-8">
+                <h6 class="form-control">{{(cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/5))}} &#8377</h6>
+            </div>
+        </div>
+        <div class="row">
+            <i>* All values are ceiling values.</i>
+        </div>
+        <div class="row">
+            <i>* Total Sum (Backup + Saving + Trade): {{(ceiling((cur-pre)/5))+(ceiling((cur-pre)*0.3))+((cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/5)))}} &#8377 its verify the total profit result because of ceiling process this can be error. If total sum and total profit results are matched then its OK.</i>
+        </div>
+    </div>
+
+    
+</body>
+</html>
