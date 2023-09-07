@@ -35,105 +35,141 @@
     <div class="container-fluid" ng-app="app" ng-controller="controller">
         <div class="row text-light text-left" style="background-color:#173a55;">
             <div class="col-10">
-                <h2>Trading Calculator</h2>
-            </div>
-            <div class="col-2">
+                <h4 class="card-title text-left mt-2">Trading Calculator</h4>
+               </div>
+               <div class="col-2">
                 <a href="https://cr3992.github.io/stock-market-tools/" class="text-light text-right"><span class="material-symbols-outlined mt-2" style="font-size:30px;">apps</span></a>
               </div>
         </div>
-        <div class="row text-left text-light" style="background-color:#787878;font-size:15px;">
+        <div class="row text-left text-light" style="background-color:#787878;font-size:12px;">
            <div class="col-12">
             <i>This Calculator works only on profit</i> 
            </div>
         </div>
-        <div class="row mt-4 text-center">
+
+        <div class="card mt-3 p-3 shadow-sm">
+        <div class="row ">
             <div class="col-1">
-                <i class="fa-brands fa-readme fa-2xl"></i>
-            </div>
-            <div class="col-9">
-                <h6>Read more about the Rule of Trading</h6> 
-            </div>
-            <div class="col-1">
-                <a class="btn btn-sm text-light" href="image.html" style="background-color:#173a55;">Click</a>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <hr class="hr">
-        </div>
-        <div class="row">
-            <div class="col-1">
-                <i class="fa-solid fa-calendar-day"></i>
+                <span class="material-symbols-outlined">currency_rupee</span>
             </div>
             <div class="col-5">
-                <h6>Previous Day Amount</h6>
+                <h6>Selling Amount</h6>
             </div>
             <div class="col-1">
-                <i class="fa-sharp fa-solid fa-calendar-days"></i>
+                <span class="material-symbols-outlined">currency_rupee</span>
             </div>
             <div class="col-5">
-                <h6>Current Day Amount</h6>
+                <h6>Buying Amount</h6>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <input type="number" ng-model="pre" class="form-control" placeholder="Enter Previous Day Amount">
+                <input type="number" ng-model="cur" class="form-control" onchange="saveItems()" placeholder="Enter Previous Day Amount">
             </div>
             <div class="col-6">
-                <input type="number" ng-model="cur" class="form-control" placeholder="Enter Current Day Amount">
+                <input type="number" ng-model="pre" class="form-control" placeholder="Enter Current Day Amount">
+            </div>
+        </div>
+        </div>
+
+        <div class="card mt-3 p-3 shadow-sm">
+            <div class="row">
+                <div class="col-2">
+                    <button class="btn text-success btn-sm" data-bs-toggle="modal" data-bs-target="#myModal1" onclick="show()" style="border:none;background-color:transparent;"><span class="material-symbols-outlined rounded" style="font-size:20px;">info</span></button>
+                  </div>
+                  <div class="col-9">
+                    <h5>Profit Distributions:</h5>
+                  </div>
+            </div>
+        <div class="row mt-4">
+            <div class="col-1 text-end">
+                <i class="fa-solid fa-money-bill-trend-up mt-2"></i>
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control border-0" value="Profit (100%)" style="background:transparent;" readonly>
+            </div>
+            <div class="col-7">
+                <h6 class="form-control border">&#8377 {{(cur-pre)}}</h6>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-1">
-                <i class="fa-solid fa-money-bill-trend-up fa-xl"></i>
+                <i class="fa-solid fa-money-bill-transfer mt-2"></i>
             </div>
-            <div class="col-3">
-                <h6>Total Profit</h6>
+            <div class="col-4">
+                <input type="text" class="form-control border-0" value="Invest (50%)" style="background:transparent;" readonly>
             </div>
-            <div class="col-8">
-                <h6 class="form-control">{{(cur-pre)}} &#8377</h6>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-1">
-                <i class="fa-solid fa-money-bill-transfer"></i>
-            </div>
-            <div class="col-3">
-                <h6>Backup 20%</h6>
-            </div>
-            <div class="col-8">
-                <h6 class="form-control">{{ceiling((cur-pre)/5)}} &#8377</h6>
+            <div class="col-7">
+                <h6 class="form-control">&#8377 {{ceiling((cur-pre)/2)}}</h6>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-1">
-                <i class="fa-solid fa-building-columns"></i>
+                <i class="fa-solid fa-building-columns mt-2"></i>
             </div>
-            <div class="col-3">
-                <h6>Saving 30%</h6>
+            <div class="col-4">
+                <input type="text" class="form-control border-0" value="Saving (30%)" style="background:transparent;" readonly>
             </div>
-            <div class="col-8">
-                <h6 class="form-control">{{ceiling((cur-pre)*0.3)}} &#8377</h6>
+            <div class="col-7">
+                <h6 class="form-control">&#8377 {{ceiling((cur-pre)*0.3)}}</h6>
             </div>
         </div>
         <div class="row mt-4">
             <div class="col-1">
-                <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+                <i class="fa-sharp fa-solid fa-arrow-trend-up mt-2"></i>
             </div>
-            <div class="col-3">
-                <h6>Trade 50%</h6>
+            <div class="col-4">
+                <input type="text" class="form-control border-0" value="Trade (20%)" style="background:transparent;" readonly>
             </div>
-            <div class="col-8">
-                <h6 class="form-control">{{(cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/5))}} &#8377</h6>
+            <div class="col-7">
+                <h6 class="form-control">&#8377 {{(cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/2))}}</h6>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-3" style="font-size:12px;">
             <i>* All values are ceiling values.</i>
         </div>
-        <div class="row">
-            <i>* Total Sum (Backup + Saving + Trade): {{(ceiling((cur-pre)/5))+(ceiling((cur-pre)*0.3))+((cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/5)))}} &#8377 its verify the total profit result because of ceiling process this can be error. If total sum and total profit results are matched then its OK.</i>
+        <div class="row" style="font-size:12px;">
+            <i>* Total Sum (Invest + Saving + Trade): {{(ceiling((cur-pre)/5))+(ceiling((cur-pre)*0.3))+((cur-pre)-(ceiling((cur-pre)*0.3)+ceiling((cur-pre)/5)))}} &#8377 its verify the total profit amount because of ceiling process can cause error. If total sum and profit value are matched then its OK.</i>
         </div>
+        </div>
+
+         <!-- The Modal1 -->
+         <div class="modal" id="myModal1">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title">Profit Distribution in Trading</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="row" id="content">
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
     </div>
 
+    <script>
+        function show(){
+            const contentDiv = document.getElementById('content');
+            const filePath = 'profit.txt';
+      
+          fetch(filePath)
+              .then(response => response.text())
+              .then(text => {
+                  contentDiv.innerHTML = text;
+                  contentDiv.style.textAlign="justify";
+              })
+              .catch(error => {
+                  console.error('Error loading content:', error);
+              });
+          }
+    </script>
     
 </body>
 </html>
